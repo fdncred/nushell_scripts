@@ -1,0 +1,66 @@
+# This is a port of powershells $psstyle
+# found here https://github.com/PowerShell/PowerShell/blob/5f3dd938b792e1a395fd011ac1461246db7c0e1f/src/System.Management.Automation/FormatAndOutput/common/PSStyle.cs
+
+alias formatting.format_accent = echo $(ansi -e '32;1m')
+alias formatting.error_accent = echo $(ansi -e '36;1m')
+alias formatting.error = echo $(ansi -e '31;1m')
+alias formatting.warning = echo $(ansi -e '33;1m')
+alias formatting.verbose = echo $(ansi -e '33;1m')
+alias formatting.debug = echo $(ansi -e '33;1m')
+
+alias reset = ansi -e '0m'
+alias blink_off = echo $(ansi -e '25m')
+alias blink = echo $(ansi -e '5m')
+alias bold_off = echo $(ansi -e '22m')
+alias bold = echo $(ansi -e '1m')
+alias hidden = echo $(ansi -e '8m')
+alias hidden_off = echo $(ansi -e '28m')
+alias reverse = echo $(ansi -e '7m')
+alias reverse_off = echo $(ansi -e '27m')
+alias italic_off = echo $(ansi -e '23m')
+alias italic = echo $(ansi -e '3m')
+alias underline_off = echo $(ansi -e '24m')
+alias underline = echo $(ansi -e '4m')
+alias strikethrough_off = echo $(ansi -e '29m')
+alias strikethrough = echo $(ansi -e '9m')
+
+# this doesn't work right. i need to have an $(ansi escape) defined but i don't think there is one
+def format_hyperlink [link text] {echo [$(ansi -o '8;;') $link '\' $text $(ansi -o '8;;') '\'] | str collect }
+
+alias foreground.black = echo $(ansi -e '30m')
+alias foreground.blue = echo $(ansi -e '34m')
+alias foreground.cyan = echo $(ansi -e '36m')
+alias foreground.darkgray = echo $(ansi -e '90m')
+alias foreground.green = echo $(ansi -e '32m')
+alias foreground.lightblue = echo $(ansi -e '94m')
+alias foreground.lightcyan = echo $(ansi -e '96m')
+alias foreground.lightgray = echo $(ansi -e '97m')
+alias foreground.lightgreen = echo $(ansi -e '92m')
+alias foreground.lightmagenta = echo $(ansi -e '95m')
+alias foreground.lightred = echo $(ansi -e '91m')
+alias foreground.lightyellow = echo $(ansi -e '93m')
+alias foreground.magenta = echo $(ansi -e '35m')
+alias foreground.red = echo $(ansi -e '31m')
+alias foreground.white = echo $(ansi -e '37m')
+alias foreground.yellow = echo $(ansi -e '33m')
+def foreground.from_rgb [red green blue] { echo [$(ansi -e '38;2;') $red ';' $green ';' $blue 'm;'] | str collect }
+
+alias background.black = echo $(ansi -e '40m')
+alias background.blue = echo $(ansi -e '44m')
+alias background.cyan = echo $(ansi -e '46m')
+alias background.dark_gray = echo $(ansi -e '100m')
+alias background.green = echo $(ansi -e '42m')
+alias background.light_blue = echo $(ansi -e '104m')
+alias background.light_cyan = echo $(ansi -e '106m')
+alias background.light_gray = echo $(ansi -e '107m')
+alias background.light_green = echo $(ansi -e '102m')
+alias background.light_magenta = echo $(ansi -e '105m')
+alias background.light_purple = echo $(ansi -e '105m')
+alias background.light_red = echo $(ansi -e '101m')
+alias background.light_yellow = echo $(ansi -e '103m')
+alias background.magenta = echo $(ansi -e '45m')
+alias background.purple = echo $(ansi -e '45m')
+alias background.red = echo $(ansi -e '41m')
+alias background.white = echo $(ansi -e '47m')
+alias background.yellow = echo $(ansi -e '43m')
+def background.from_rgb [red green blue] { echo [$(ansi -e '48;2;') $red ';' $green ';' $blue 'm;'] | str collect }
