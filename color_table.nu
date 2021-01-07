@@ -53,12 +53,12 @@ def mk_header [color_range:range] {
 }
 
 def color_row_range [num:int bg_rg:range] {
-    let relet = $(ansi relet)
-    let row_header = $(build-string $num "m " $(ansi relet))
+    let reset = $(ansi reset)
+    let row_header = $(build-string $num "m " $(ansi reset))
     let row_data = $(echo $bg_rg | each {
         let row_name = $(echo [$(build-string $num ';' $it) "m"] | str collect)
         let ansi_color = $(ansi -e $row_name)
-        echo [$ansi_color ' ' $row_name ' ' $relet] | str collect
+        echo [$ansi_color ' ' $row_name ' ' $reset] | str collect
     } | append $(char newline) | str collect)
     echo [$row_header $row_data] | str collect
 }
@@ -76,8 +76,8 @@ def color_table [] {
     make_header $true
     create_color_tables 90..97 100..107
 
-    mk_header 40..47
-    mk_header 100..107
+    #mk_header 40..47
+    #mk_header 100..107
 }
 
 color_table

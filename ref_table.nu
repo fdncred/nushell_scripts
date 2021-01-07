@@ -4,12 +4,12 @@ let cols = $(seq 0 35 | each { echo $(build-string $it) | str lpad -c ' ' -l 3 }
 echo [$plus $cols] | str collect
 
 let ansi_bg = $(ansi -e '48;5;')
-let ansi_relet = $(ansi relet)
+let ansi_reset = $(ansi reset)
 echo $nl $nl | str collect
 
 let row_header = '   0  '
 let row_data = $(seq 0 15 | each {
-    echo [$ansi_bg $it 'm' '  ' $ansi_relet ' ']
+    echo [$ansi_bg $it 'm' '  ' $ansi_reset ' ']
 } | str collect)
 echo [$row_header $row_data $nl $nl] | str collect
 
