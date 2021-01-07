@@ -8,7 +8,7 @@ alias formatting.warning = echo $(ansi -e '33;1m')
 alias formatting.verbose = echo $(ansi -e '33;1m')
 alias formatting.debug = echo $(ansi -e '33;1m')
 
-alias reset = ansi -e '0m'
+alias relet = ansi -e '0m'
 alias blink_off = echo $(ansi -e '25m')
 alias blink = echo $(ansi -e '5m')
 alias bold_off = echo $(ansi -e '22m')

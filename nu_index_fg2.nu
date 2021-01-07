@@ -1,9 +1,9 @@
 def show_index_colors [] {
-    set prefix = "38;5;"
+    let prefix = "38;5;"
     echo 1..256 | each {
-        set cr = $(echo $(build-string $it % 16) | math eval)
-        set color = $(echo [$(ansi -e $prefix) $(build-string $it) 'm'] | str collect)
-        set padded_number = $(echo $(build-string $it | str lpad -l 3 -c '0'))
+        let cr = $(echo $(build-string $it % 16) | math eval)
+        let color = $(echo [$(ansi -e $prefix) $(build-string $it) 'm'] | str collect)
+        let padded_number = $(echo $(build-string $it | str lpad -l 3 -c '0'))
         if $cr == 0 {
             echo [$color $padded_number ' ' $(char newline)]
         } {
