@@ -13,6 +13,7 @@ let row_data = $(seq 0 15 | each {
 } | str collect)
 echo [$row_header $row_data $nl $nl] | str collect
 
+# some comment here
 seq 0 6 | each {
     let math_str = $(build-string $it ' * 36 + 16')
     let i = $(echo $math_str | math eval)
@@ -24,3 +25,4 @@ seq 0 6 | each {
     } | str collect)
     echo [$row_header '  ' $row_data $nl $nl] | str collect
 } | str collect
+
