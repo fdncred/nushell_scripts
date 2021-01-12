@@ -22,6 +22,10 @@ def make_header [hi] {
     }
 }
 
+# mk_header and make_header do the same thing in different ways
+# make_header is far easier to read and understand
+# mk_header is more convoluted but less repetitive
+
 def mk_header [color_range:range] {
     let min_rng = $(echo $color_range | math min)
     let hi_start_pad = 11
@@ -29,8 +33,6 @@ def mk_header [color_range:range] {
     let lo_start_pad = 10
     let lo_regular_pad = 8
     echo $color_range | each {
-        #let cur = $(echo $it | str to-int)
-        #let cur = $(echo $it)
         let ansi_color = $(echo [$(build-string $it 'm')])
         if $it == $min_rng {
             if $min_rng == 100 {
@@ -41,7 +43,7 @@ def mk_header [color_range:range] {
                 echo $header
             }
         } {
-            if $min_rng > 100 {
+            if $min_rng >= 100 {
                 let header = $(echo $ansi_color | str lpad -l $hi_regular_pad -c ' ')
                 echo $header
             } {
@@ -50,6 +52,7 @@ def mk_header [color_range:range] {
             }
         }
     } | str collect
+    echo $(char newline)
 }
 
 def color_row_range [num:int bg_rg:range] {
@@ -70,14 +73,16 @@ def create_color_tables [fg_range:range bg_range:range] {
 }
 
 def color_table [] {
-    make_header $false
+    #make_header $false
+    mk_header 40..47
     create_color_tables 30..37 40..47
 
-    make_header $true
-    create_color_tables 90..97 100..107
+    # put a line between tables
+    echo $(char newline)
 
-    #mk_header 40..47
-    #mk_header 100..107
+    #make_header $true
+    mk_header 100..107
+    create_color_tables 90..97 100..107
 }
 
 color_table
