@@ -12,7 +12,7 @@ seq 0 $height | each {
             echo [$(ansi -e '48;2;0;0;') $(build-string $fgcolor m) ' ' $(ansi -e '0m')] | str collect
         }
     } | str collect)
-    echo [$row_data $(char newline)] | str collect
+    echo [$row_data $(char newline)] | str collect | autoview
 } | str collect
 
 def iter_inc [incr mult iter] {
