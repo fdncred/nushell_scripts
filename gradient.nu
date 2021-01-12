@@ -1,3 +1,5 @@
+# this script will print a blue gradient on the screen
+
 let height = 40 # really need to get the terminal height here
 let width = 160  # really need to get the terminal width here
 

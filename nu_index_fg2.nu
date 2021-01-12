@@ -1,3 +1,6 @@
+# this script uses foreground ansi index colors to print
+# a table of 16 rows by 16 colums where each item is a
+# different color
 def show_index_colors [] {
     let prefix = "38;5;"
     echo 1..256 | each {
@@ -14,5 +17,8 @@ def show_index_colors [] {
 
 show_index_colors
 
-#one-liner
-#echo 0..255 | each {echo [$(ansi -e '38;5;') $(build-string $it) 'm' $(build-string $it) ' ']} | str collect
+# one-liner version that just prints
+# it all on one line which wraps in
+# your terminal
+
+#echo 1..256 | each {echo [$(ansi -e '38;5;') $(build-string $it) 'm' $(build-string $it) ' ']} | str collect
