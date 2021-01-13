@@ -1,66 +1,110 @@
 # This is a port of powershells $psstyle
 # found here https://github.com/PowerShell/PowerShell/blob/5f3dd938b792e1a395fd011ac1461246db7c0e1f/src/System.Management.Automation/FormatAndOutput/common/PSStyle.cs
 
-alias formatting.format_accent = echo $(ansi -e '32;1m')
-alias formatting.error_accent = echo $(ansi -e '36;1m')
-alias formatting.error = echo $(ansi -e '31;1m')
-alias formatting.warning = echo $(ansi -e '33;1m')
-alias formatting.verbose = echo $(ansi -e '33;1m')
-alias formatting.debug = echo $(ansi -e '33;1m')
+# Example Usage
+# echo $(fg_blue) Darren $(relet) ' ' Schroeder | str collect
+# More examples in the short_list.nu script
 
-alias relet = ansi -e '0m'
-alias blink_off = echo $(ansi -e '25m')
-alias blink = echo $(ansi -e '5m')
-alias bold_off = echo $(ansi -e '22m')
-alias bold = echo $(ansi -e '1m')
-alias hidden = echo $(ansi -e '8m')
-alias hidden_off = echo $(ansi -e '28m')
-alias reverse = echo $(ansi -e '7m')
-alias reverse_off = echo $(ansi -e '27m')
-alias italic_off = echo $(ansi -e '23m')
-alias italic = echo $(ansi -e '3m')
-alias underline_off = echo $(ansi -e '24m')
-alias underline = echo $(ansi -e '4m')
-alias strikethrough_off = echo $(ansi -e '29m')
-alias strikethrough = echo $(ansi -e '9m')
+alias fmt_error = ansi -e '31;1m'
+alias fmt_warning = ansi -e '33;1m'
+alias fmt_verbose = ansi -e '33;1m'
+alias fmt_debug = ansi -e '33;1m'
+alias fmt_format_accent = ansi -e '32;1m'
+alias fmt_error_accent = ansi -e '36;1m'
+
+alias relet = ansi -e '0m' # really reset but there are external commands for reset already
+alias blink_off = ansi -e '25m'
+alias blink_on = ansi -e '5m'
+alias bold_off = ansi -e '22m'
+alias bold_on = ansi -e '1m'
+alias hidden_on = ansi -e '8m'
+alias hidden_off = ansi -e '28m'
+alias reverse_on = ansi -e '7m'
+alias reverse_off = ansi -e '27m'
+alias italic_off = ansi -e '23m'
+alias italic_on = ansi -e '3m'
+alias underline_off = ansi -e '24m'
+alias underline_on = ansi -e '4m'
+alias strikethrough_off = ansi -e '29m'
+alias strikethrough_on = ansi -e '9m'
 
 # this doesn't work right. i need to have an $(ansi escape) defined but i don't think there is one
-def format_hyperlink [link text] {echo [$(ansi -o '8;;') $link '\' $text $(ansi -o '8;;') '\'] | str collect }
+#def format_hyperlink [link text] {echo [$(ansi -o '8;;') $link '\' $text $(ansi -o '8;;') '\'] | str collect }
 
-alias foreground.black = echo $(ansi -e '30m')
-alias foreground.blue = echo $(ansi -e '34m')
-alias foreground.cyan = echo $(ansi -e '36m')
-alias foreground.darkgray = echo $(ansi -e '90m')
-alias foreground.green = echo $(ansi -e '32m')
-alias foreground.lightblue = echo $(ansi -e '94m')
-alias foreground.lightcyan = echo $(ansi -e '96m')
-alias foreground.lightgray = echo $(ansi -e '97m')
-alias foreground.lightgreen = echo $(ansi -e '92m')
-alias foreground.lightmagenta = echo $(ansi -e '95m')
-alias foreground.lightred = echo $(ansi -e '91m')
-alias foreground.lightyellow = echo $(ansi -e '93m')
-alias foreground.magenta = echo $(ansi -e '35m')
-alias foreground.red = echo $(ansi -e '31m')
-alias foreground.white = echo $(ansi -e '37m')
-alias foreground.yellow = echo $(ansi -e '33m')
-def foreground.from_rgb [red green blue] { echo [$(ansi -e '38;2;') $red ';' $green ';' $blue 'm;'] | str collect }
+alias fg_black = ansi -e '30m'
+alias fg_red = ansi -e '31m'
+alias fg_green = ansi -e '32m'
+alias fg_yellow = ansi -e '33m'
+alias fg_blue = ansi -e '34m'
+alias fg_magenta = ansi -e '35m'
+alias fg_purple = ansi -e '35m'
+alias fg_cyan = ansi -e '36m'
+alias fg_white = ansi -e '37m'
 
-alias background.black = echo $(ansi -e '40m')
-alias background.blue = echo $(ansi -e '44m')
-alias background.cyan = echo $(ansi -e '46m')
-alias background.dark_gray = echo $(ansi -e '100m')
-alias background.green = echo $(ansi -e '42m')
-alias background.light_blue = echo $(ansi -e '104m')
-alias background.light_cyan = echo $(ansi -e '106m')
-alias background.light_gray = echo $(ansi -e '107m')
-alias background.light_green = echo $(ansi -e '102m')
-alias background.light_magenta = echo $(ansi -e '105m')
-alias background.light_purple = echo $(ansi -e '105m')
-alias background.light_red = echo $(ansi -e '101m')
-alias background.light_yellow = echo $(ansi -e '103m')
-alias background.magenta = echo $(ansi -e '45m')
-alias background.purple = echo $(ansi -e '45m')
-alias background.red = echo $(ansi -e '41m')
-alias background.white = echo $(ansi -e '47m')
-alias background.yellow = echo $(ansi -e '43m')
-def background.from_rgb [red green blue] { echo [$(ansi -e '48;2;') $red ';' $green ';' $blue 'm;'] | str collect }
+alias fg_dark_gray = ansi -e '90m'
+alias fg_light_black = ansi -e '90m'
+alias fg_light_red = ansi -e '91m'
+alias fg_light_green = ansi -e '92m'
+alias fg_light_yellow = ansi -e '93m'
+alias fg_light_blue = ansi -e '94m'
+alias fg_light_magenta = ansi -e '95m'
+alias fg_light_purple = ansi -e '95m'
+alias fg_light_cyan = ansi -e '96m'
+alias fg_light_gray = ansi -e '97m'
+alias fg_light_white = ansi -e '97m'
+
+# construct a rgb foreground color
+def fg_from_rgb [
+    red:int # red component 0-255
+    green:int # green component 0-255
+    blue:int # blue component 0-255
+    ] {
+        echo [$(ansi -e '38;2;') $red ';' $green ';' $blue 'm'] | str collect
+    }
+
+alias bg_black = ansi -e '40m'
+alias bg_red = ansi -e '41m'
+alias bg_green = ansi -e '42m'
+alias bg_yellow = ansi -e '43m'
+alias bg_blue = ansi -e '44m'
+alias bg_magenta = ansi -e '45m'
+alias bg_purple = ansi -e '45m'
+alias bg_cyan = ansi -e '46m'
+alias bg_white = ansi -e '47m'
+
+alias bg_dark_gray = ansi -e '100m'
+alias bg_light_black = ansi -e '100m'
+alias bg_light_red = ansi -e '101m'
+alias bg_light_green = ansi -e '102m'
+alias bg_light_yellow = ansi -e '103m'
+alias bg_light_magenta = ansi -e '105m'
+alias bg_light_purple = ansi -e '105m'
+alias bg_light_blue = ansi -e '104m'
+alias bg_light_cyan = ansi -e '106m'
+alias bg_light_gray = ansi -e '107m'
+alias bg_light_white = ansi -e '107m'
+
+alias bg_expand = ansi -e 'K'
+
+# construct a rgb background color
+def bg_from_rgb [
+    red:int # red component 0-255
+    green:int # green component 0-255
+    blue:int # blue component 0-255
+    ] {
+        echo [$(ansi -e '48;2;') $red ';' $green ';' $blue 'm'] | str collect
+    }
+
+# Get a foreground color from an index value 0-255
+def fg_from_index [
+    idx:int # index value 0-255
+] {
+    echo [$(ansi -e '38;5;') $idx 'm'] | str collect
+}
+
+# Get a background color from an index value 0-255
+def bg_from_index [
+    idx:int # index value 0-255
+] {
+    echo [$(ansi -e '48;5;') $idx 'm'] | str collect
+}
