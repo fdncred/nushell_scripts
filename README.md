@@ -7,4 +7,5 @@ Most of these scripts are in the `nushell` language but some are from bash or po
 All the scripts work except for `percent_meter.nu`. If you find otherwise, please report it as an issue.  99.9% of these script have to deal with ansi coloring. I picked anis coloring as a platform because I'm interested in coloring in the terminal and it was something that is pretty easily portable between shells.
 
 Have fun!
+
 Darren 01/19/2021
