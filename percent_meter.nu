@@ -4,7 +4,7 @@ def loading [] {
         sleep 50ms
         hide_sursor
         # I believe '1000D' means move the cursor to the left 1000 columns
-        echo $(ansi -e '1000D') | autoview
+        echo $(ansi -e '1000D')
         echo $(build-string $it '%') | autoview
     }
     show_cursor
