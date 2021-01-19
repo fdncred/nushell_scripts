@@ -1,13 +1,25 @@
+# Background Colors
 echo 40..47 100..107 49 | each {
     let clbg = $it
+    # Foreground Colors
     echo 30..37 90..97 39 | each {
         let clfg = $it
-        let row = $(echo 0 1 2 4 5 6 | each {
+        # 0 Normal
+        # 1 Bold or increased intensity
+        # 2 Faint or decreased intensity
+        # 3 Italic (not widely supported)
+        # 4 Underline
+        # 5 Slow Blink < 150 per minute
+        # 6 Rapid Blink > 150 per minute
+        # 7 Reverse Video
+        # 8 Conceal (not widely supported)
+        # 9 Strike-through
+        let row = $(echo 0..9 | each {
             let attr = $it
             let ansi_str = $(echo [$(make-str $attr) ';' $(make-str $clbg) ';' $(make-str $clfg) 'm'] | str collect)
             echo [$(ansi -e $ansi_str) ' ' $ansi_str ' ' $(ansi reset)] | str collect
             } | str collect)
-        echo [$row $(char newline)] | str collect
+        echo [$row $(char newline)] | str collect | autoview
     } | str collect
 } | str collect
 
