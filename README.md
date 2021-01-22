@@ -9,3 +9,8 @@ All the scripts work except for `percent_meter.nu`. If you find otherwise, pleas
 Have fun!
 
 Darren 01/19/2021
+
+
+## Some links I want to save about ansi
+https://handwiki.org/wiki/ANSI_escape_code
+https://docs.microsoft.com/en-us/windows/console/console-virtual-terminal-sequences
