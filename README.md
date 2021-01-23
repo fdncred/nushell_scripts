@@ -1,3 +1,5 @@
+Archiving this repo because I moved these [scripts here](https://github.com/nushell/nu_scripts)
+
 ## Nushell Scripts Readme
 
 This is a collection of scripts that I wrote while learning [nushell](https://github.com/nushell/nushell) scripting that started with `nushell` `0.24.2` with multiline scripts and continues to move toward maturity with version `0.25.2`.
